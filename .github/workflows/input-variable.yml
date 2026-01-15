@@ -1,0 +1,24 @@
+name: Inputs Variable
+on: 
+  workflow_dispatch:
+    inputs:
+      environment: 
+          description: Choose the environment to deploy to
+          required: true
+          default: dev
+          type: choice
+          options: 
+            - dev
+            - test
+            - prod
+
+      artifact_tags: 
+        description: Choose the git tag to display
+        required: true
+
+jobs:
+  input-variable:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy the App
+        run: echo "Deploying the ${{ inputs.artifact_tags }} application to ${{ inputs.environment }}"
